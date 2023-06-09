@@ -6,14 +6,13 @@ const startBtn = document.querySelector('[data-start]');
 const inputEl = document.querySelector('#datetime-picker');
 startBtn.disabled = true;
 
-const fp = flatpickr(inputEl, {
+const chooseTime = flatpickr(inputEl, {
   enableTime: true,
   time_24hr: true,
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
     if (selectedDates[0] < new Date()) {
-      startBtn.setAttribute('disabled', 'disabled');
       Notiflix.Notify.failure('Please choose a date in the future');
     } else {
       startBtn.disabled = false;
@@ -34,8 +33,6 @@ const timerValue = {
 function changeTimerValue() {
   let timer = setInterval(() => {
     let countdown = new Date(inputEl.value) - new Date();
-    startBtn.disabled = true;
-    inputEl.disabled = true;
     if (countdown >= 0) {
       let timerData = convertMs(countdown);
       timerValue.days.textContent = timerData.days;
