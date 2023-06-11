@@ -26,11 +26,13 @@ function submitForm(event) {
     function createPromise(position, delay) {
       return new Promise((resolve, reject) => {
         const shouldResolve = Math.random() > 0.3;
-        if (shouldResolve) {
-          resolve({ position: position, delay: delay });
-        }
-        reject({ position: position, delay: delay });
-      });
+        setTimeout(() => {
+          if (shouldResolve) {
+            resolve({ position: position, delay: delay });
+          }
+          reject({ position: position, delay: delay });
+        }, delay);
+      })
     }
   }
 }
@@ -40,5 +42,5 @@ function readingInputData() {
     delay: Number(firstDelay.value),
     step: Number(delayStep.value),
     amount: Number(amountEl.value),
-  };
+  }
 }
